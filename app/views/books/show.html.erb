@@ -1,0 +1,70 @@
+<!-- header  部分テンプレート　_header.html.erb -->
+<%= render 'books/header', books: @books %>
+
+<div class="body">
+	<div class="container">
+		<div class='row'>
+
+			<div class='col-xs-3'>
+				<h2>User info</h2>
+				<table class='table'>
+					<tr><img class="attachment user profile_image fallback" src="" alt="No image" /></tr>
+					<tr>
+						<th>name</th>
+						<th>＃＃＃＃</th>
+					</tr>
+					<tr>
+						<th>introduction</th>
+						<th>＃＃＃＃</th>
+					</tr>
+				</table>
+				<div class='row'>
+					<a class="col-xs-12 btn btn-default glyphicon glyphicon-wrench" href="/users/156/edit"></a>
+			    </div>
+				<h2>New book</h2>
+				<form class="new_book" id="new_book" action="/books" accept-charset="UTF-8" method="post">
+					<div class="field row">
+						<label for="book_title">Title</label>
+						<input class="col-xs-12" type="text" name="book[title]" id="book_title" />
+					</div>
+
+					<div class="field row">
+						<label for="book_opinion">Opinion</label>
+						<textarea class="col-xs-12" name="book[body]" id="book_body">
+						</textarea>
+					</div>
+
+					<div class="actions row">
+						<input type="submit" name="commit" value="Create Book" class="btn btn-primary col-xs-12" data-disable-with="Create Book" />
+					</div>
+				</form>
+			</div>
+
+			<!-- 右　Book detail 自分の投稿のみedit,destroyボタン表示-->
+			<div class='col-xs-9'>
+				<h2>Book detail</h2>
+				<table class='table'>
+					<tr>
+						<td>
+							<a href="">
+								<img class="attachment user profile_image fallback" /><br>name
+							</a><!-- user/showにリンクをつける -->
+						</td>
+						<td><%= @book.title %></td>
+						<td><%= @book.opinion %></td>
+
+
+							<td><%= link_to "Edit", edit_book_path(@book) %></td>
+							<td><%= link_to "Destroy", book_path(@book), method: :delete, "data-confirm" => "本当に消しますか？" %></td>
+							<!-- 他人のブックは削除・編集できないようにする -->
+
+					</tr>
+				</table>
+			</div>
+
+		</div>
+	</div>
+</div>
+
+<!-- hoofer  部分テンプレート　_footer.html.erb -->
+<%= render 'books/footer' %>
