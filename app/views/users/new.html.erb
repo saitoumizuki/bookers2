@@ -30,23 +30,9 @@
 						<% end %>
 				    </div>
 				</div>
-				<h2>New book</h2>
-				<form class="new_book" id="new_book" action="/books" accept-charset="UTF-8" method="post">
-					<div class="field row">
-						<label for="book_title">Title</label>
-						<input class="col-xs-12" type="text" name="book[title]" id="book_title" />
-					</div>
-
-					<div class="field row">
-						<label for="book_opinion">Opinion</label>
-						<textarea class="col-xs-12" name="book[body]" id="book_body">
-						</textarea>
-					</div>
-
-					<div class="actions row">
-						<input type="submit" name="commit" value="Create Book" class="btn btn-primary col-xs-12" data-disable-with="Create Book" />
-					</div>
-				</form>
+				<div class="new_book">
+					<%= render 'books/new', book: @book %>
+				</div>
 			</div>
 
 			<div class='col-xs-9'>

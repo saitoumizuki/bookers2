@@ -8,4 +8,8 @@ Rails.application.routes.draw do
 	root 'books#index'
 
 	resources :users, only: [:show, :new, :edit, :update]
+
+	post 'books/_new' => 'books#create'
+	get 'books/_new' => 'books#new'
+
 end
