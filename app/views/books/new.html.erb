@@ -1,3 +1,4 @@
+<!-- book/new -->
 <!-- header  部分テンプレート　_header.html.erb -->
 <%= render 'books/header', books: @books %>
 
@@ -5,34 +6,42 @@
 	<div class='container'>
 		<div class='row'>
 			<div class='col-xs-3'>
-				<h2>User info</h2>
-				<table class='table'>
-					<tr><img class="attachment user profile_image fallback" src="" alt="No image" /></tr>
-					<tr>
-						<th>name</th>
-						<th>＃＃＃＃</th>
-					</tr>
-					<tr>
-						<th>introduction</th>
-						<th>＃＃＃＃</th>
-					</tr>
-				</table>
-				<div class='row'>
-					<a class="col-xs-12 btn btn-default glyphicon glyphicon-wrench" href="/users/156/edit"></a>
-			    </div>
+				<div class="user_info">
+					<h2>User info</h2>
+					<table class='table'>
+						<tr>
+							<%= attachment_image_tag @user, :profile_image, :fill, 100, 100, format: 'jpeg', class: "img-circle pull-left profile-img", fallback: "no_image.jpg" %>
+						</tr>
+						<tr>
+							<th>name</th>
+							<th><%= @user.name %></th>
+						</tr>
+						<tr>
+							<th>introduction</th>
+							<th><%= @user.introduction %></th>
+						</tr>
+					</table>
+					<div class='row'>
+						<% if @user.id == current_user.id %>
+							<p><%= link_to "", edit_user_path(@user), class: "col-xs-12 btn btn-default glyphicon glyphicon-wrench" %></p>
+						<% else %>
+							<p><%= link_to "", user_path(current_user.id), class: "col-xs-12 btn btn-default glyphicon glyphicon-wrench" %></p>
+						<% end %>
+				    </div>
+				</div>
 
 				<h2>New book</h2>
 				<%= form_for(@book) do |f| %>
 					<div class="field row">
 						<label for="book_title">Title</label>
-						<%= f.text_field :title %>
+						<%= f.text_field :title, class:"col-xs-12" %>
 					</div>
 					<div class="field row">
 						<label for="book_opinion">Opinion</label>
-						<%= f.text_area :opinion %>
+						<%= f.text_area :opinion, class:"col-xs-12" %>
 					</div>
 					<div class="actions row">
-						<%= f.submit 'Create Book' %>
+						<%= f.submit 'Create Book', class:"btn btn-primary col-xs-12" %>
 					</div>
 				<% end %>
 
@@ -56,7 +65,7 @@
 							<tr>
 								<!-- 投稿ユーザーのshowページへリンク、プロフ画像の表示 -->
 								<td><a href=""><img class="attachment user profile_image fallback" /></a></td>
-								<td><%= book.title %></td>
+								<td><%= link_to book.title, book_path(book) %></td>
 								<td><%= book.opinion %></td>
 							</tr>
 						</tbody>

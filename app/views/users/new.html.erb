@@ -1,3 +1,4 @@
+<!-- user/new -->
 <!-- header  部分テンプレート　_header.html.erb -->
 <%= render 'books/header', books: @books %>
 
@@ -6,21 +7,29 @@
 		<div class="row">
 
 			<div class='col-xs-3'>
-				<h2>User info</h2>
-				<table class='table'>
-					<tr><img class="attachment user profile_image fallback" src="" alt="No image" /></tr>
-					<tr>
-						<th>name</th>
-						<th>＃＃＃＃</th>
-					</tr>
-					<tr>
-						<th>introduction</th>
-						<th>＃＃＃＃</th>
-					</tr>
-				</table>
-				<div class='row'>
-					<a class="col-xs-12 btn btn-default glyphicon glyphicon-wrench" href="/users/156/edit"></a>
-			    </div>
+				<div class="user_info">
+					<h2>User info</h2>
+					<table class='table'>
+						<tr>
+							<%= attachment_image_tag @user, :profile_image, :fill, 100, 100, format: 'jpeg', class: "img-circle pull-left profile-img", fallback: "no_image.jpg" %>
+						</tr>
+						<tr>
+							<th>name</th>
+							<th><%= @user.name %></th>
+						</tr>
+						<tr>
+							<th>introduction</th>
+							<th><%= @user.introduction %></th>
+						</tr>
+					</table>
+					<div class='row'>
+						<% if @user.id == current_user.id %>
+							<p><%= link_to "", edit_user_path(@user), class: "col-xs-12 btn btn-default glyphicon glyphicon-wrench" %></p>
+						<% else %>
+							<p><%= link_to "", user_path(current_user.id), class: "col-xs-12 btn btn-default glyphicon glyphicon-wrench" %></p>
+						<% end %>
+				    </div>
+				</div>
 				<h2>New book</h2>
 				<form class="new_book" id="new_book" action="/books" accept-charset="UTF-8" method="post">
 					<div class="field row">
@@ -52,19 +61,18 @@
 						</tr>
 					</thead>
 
-					<tbody>
-						<tr>
-							<td><img class="attachment user profile_image fallback" src="" alt="No image icon" /></td>
-							<td>name</td>
-							<td><a href="">Show</a></td>
-						</tr>
-						<tr>
-							<td><img class="attachment user profile_image fallback" src="" alt="No image icon" />
-							</td>
-							<td>name</td>
-							<td><a href="">Show</a></td>
-						</tr>
-					</tbody>
+					<% @users.each do |user| %>
+						<tbody>
+							<tr>
+								<td>
+									<%= attachment_image_tag user, :profile_image, :fill, 20, 20, fallback: "no_image.jpg" %>
+								</td>
+								<td><%= user.name %></td>
+								<td><%= link_to "Show", user_path(user) %></td>
+							</tr>
+						</tbody>
+					<% end %>
+
 				</table>
 			</div>
 		</div>
