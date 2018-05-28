@@ -1,4 +1,8 @@
 class ApplicationController < ActionController::Base
+	rescue_from ActiveRecord::RecordNotFound do |exception|
+    redirect_to :root
+	end
+
   	before_action :authenticate_user!, except: [:about, :index]
 	protect_from_forgery with: :exception
 	before_action :configure_permitted_parameters, if: :devise_controller?
