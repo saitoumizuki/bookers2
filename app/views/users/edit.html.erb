@@ -1,9 +1,11 @@
+<!-- user/edit -->
 <!-- header  部分テンプレート　_header.html.erb -->
 <%= render 'books/header', books: @books %>
 
 
 <div class="body">
 	<div class="container">
+		<%= render 'books/notice' %>
 		<div class="col-xs-3">
 			<h2>User info</h2>
 

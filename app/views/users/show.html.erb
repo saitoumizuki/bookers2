@@ -4,14 +4,14 @@
 
 <div class="body">
 	<div class="container">
+		<%= render 'books/notice' %>
 		<div class='row'>
-
 			<div class='col-xs-3'>
 				<div class="user_info">
 					<h2>User info</h2>
 					<table class='table'>
 						<tr>
-							<%= attachment_image_tag @user, :profile_image, :fill, 100, 100, format: 'jpeg', class: "img-circle pull-left profile-img", fallback: "no_image.jpg" %>
+							<%= attachment_image_tag @user, :profile_image, :fill, 100, 100, format: 'jpeg', class: "profile-img", fallback: "no_image.jpg" %>
 						</tr>
 						<tr>
 							<th>name</th>

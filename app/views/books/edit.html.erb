@@ -1,8 +1,9 @@
+<% if current_user == @book.user%>
 <!-- header  部分テンプレート　_header.html.erb -->
 <%= render 'books/header', books: @books %>
-
 <div class="body">
 	<div class="container">
+		<%= render 'books/notice' %>
 		<div class='row'>
 			<div class='col-md-6 col-md-offset-3'>
 				<h1>Editing Book</h1>
@@ -29,3 +30,8 @@
 
 <!-- hoofer  部分テンプレート　_footer.html.erb -->
 <%= render 'books/footer' %>
+
+<% else %>
+<p>他人の投稿は編集・削除できません。<%= link_to "Back", root_path %></p>
+
+<% end %>
