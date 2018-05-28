@@ -19,7 +19,8 @@ class BooksController < ApplicationController
   def create
       @book = Book.new(book_params)
       @book.user_id = current_user.id
-      if @book.save
+      if
+        @book.save
         flash[:notice] = '新規のBookが投稿されました。'
         redirect_to book_path(@book)
 
@@ -39,7 +40,6 @@ class BooksController < ApplicationController
       book.update(book_params)
       flash[:notice] = 'Bookが更新されました。'
       redirect_to book_path(book)
-
   end
 
   def destroy

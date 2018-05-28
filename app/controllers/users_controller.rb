@@ -18,7 +18,8 @@ class UsersController < ApplicationController
 
 	def update
 		@user = User.find(params[:id])
-		if @user.update(user_params)
+		if
+			@user.update(user_params)
 	    	redirect_to user_path(@user.id)
 	    else
 	    	flash[:notice] = '名前は2文字以上、20文字以内・自己紹介は50文字以内にしてください。'
